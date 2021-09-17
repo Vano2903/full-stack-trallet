@@ -7,6 +7,7 @@ import (
 	"reflect"
 	"time"
 
+	timex "github.com/icza/gox/timex"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -27,6 +28,7 @@ type User struct {
 	Password       string             `bson:"password, omitempty" json:"password, omitempty"`
 	ProfilePicture string             `bson:"profilePicture, omitempty" json:"profilePicture, omitempty"`
 	IsVaccinated   bool               `bson:"isVaccinated, omitempty" json:"isVaccinated, omitempty"`
+	IsMinor        bool               `bson:"isMinor, omitempty" json:"isMinor, omitempty"`
 	BornDate       primitive.DateTime `bson:"bornDate, omitempty" json:"bornDate, omitempty"`
 	Documents      []Document         `bson:"documents, omitempty" json:"documents, omitempty"`
 	// Travels        []Travel           `bson:"travels, omitempty" json:"travels, omitempty"`
@@ -73,6 +75,34 @@ func ConnectToDatabaseUsers() error {
 	return nil
 }
 
+func ExistUser(email string) (bool, error) {
+	cur, err := collectionUser.Find(ctxUser, bson.M{"email": email})
+	if err != nil {
+		return false, err
+	}
+	defer cur.Close(ctxUser)
+	var userFound []User
+
+	//convert cur in []User
+	if err = cur.All(context.TODO(), &userFound); err != nil {
+		return false, err
+	}
+
+	if len(userFound) != 0 {
+		
+	}
+
+	//check if user exist
+	if len(userFound) != 0 {
+		if userFound[0].Email == email {
+			return true, nil
+		}
+		return User{}, errors.New("incorrect credentials")
+	} else {
+		return User{}, errors.New("no user found")
+	}
+}
+
 //check if user exist in database and will return empty struct if not found, on the other hand will return the User informations
 func GetUser(email, password string) (User, error) {
 	//search in database
@@ -111,21 +141,15 @@ func AddUser(name, lastName, email, password, pfp string, bornDate primitive.Dat
 	if !found.IsStructureEmpty() {
 		return "", errors.New("user already exist")
 	}
-	pfpUrl := "https://avatars.dicebear.com/api/identicon/" + name + lastName + ".svg"
+	if pfp == "" {
+		pfp = "https://avatars.dicebear.com/api/identicon/" + name + lastName + ".svg"
+	}
 	//adding user to database
-	// toInsert := User{user, pass, authlvl}
+	var isMinor bool
+	year, _, _, _, _, _ := timex.Diff(time.Now(), bornDate.Time())
 
-	type User struct {
-		ID             primitive.ObjectID `bson:"_id, omitempty" json:"-"`
-		Name           string             `bson:"name, omitempty" json:"name, omitempty"`
-		LastName       string             `bson:"lastName, omitempty" json:"lastName, omitempty"`
-		Email          string             `bson:"email, omitempty" json:"email, omitempty"`
-		Password       string             `bson:"password, omitempty" json:"password, omitempty"`
-		ProfilePicture string             `bson:"profilePicture, omitempty" json:"profilePicture, omitempty"`
-		IsVaccinated   bool               `bson:"isVaccinated, omitempty" json:"isVaccinated, omitempty"`
-		BornDate       primitive.DateTime `bson:"bornDate, omitempty" json:"bornDate, omitempty"`
-		Documents      []Document         `bson:"documents, omitempty" json:"documents, omitempty"`
-		// Travels        []Travel           `bson:"travels, omitempty" json:"travels, omitempty"`
+	if year < 18 {
+		isMinor = true
 	}
 
 	toInsert := struct {
@@ -135,14 +159,16 @@ func AddUser(name, lastName, email, password, pfp string, bornDate primitive.Dat
 		Password       string             `bson:"password, omitempty" json:"password, omitempty"`
 		ProfilePicture string             `bson:"profilePicture, omitempty" json:"profilePicture, omitempty"`
 		IsVaccinated   bool               `bson:"isVaccinated, omitempty" json:"isVaccinated, omitempty"`
+		IsMinor        bool               `bson:"isMinor, omitempty" json:"isMinor, omitempty"`
 		BornDate       primitive.DateTime `bson:"bornDate, omitempty" json:"bornDate, omitempty"`
 	}{
 		name,
 		lastName,
 		email,
 		password,
-		pfpUrl,
+		pfp,
 		false,
+		isMinor,
 		bornDate,
 	}
 
