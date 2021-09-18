@@ -1,13 +1,9 @@
 /*######## LOGIN #########*/
 function login() {
-    let ok=1;
-
     let password=document.querySelector("#floatingPassword");
     let email=document.querySelector("#floatingEmail");
 
-    ok=loginCheck(email,password);
-
-    if(ok){
+    if(loginCheck(email,password)){
         serverLogin(email,password);
         console.log("Richiesta inviata al server");
         
@@ -27,7 +23,7 @@ document.readyState=function () {
         }
     };
 
-acceptlogin();
+//acceptlogin();
 /**
  * display the loading animation and send the user datas to the login api and check if the response is correct
  * @param {string} code if "def" is set as code the function wont get the data from the textboxes to check the login, 
