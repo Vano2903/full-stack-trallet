@@ -43,7 +43,7 @@ type Post struct {
 }
 
 func LoginPageHandler(w http.ResponseWriter, r *http.Request) {
-	home, err := os.ReadFile("front-end/pages/User/login.html")
+	home, err := os.ReadFile("front-end/pages/User/User.html")
 	if err != nil {
 		UnavailablePage(w)
 		return
@@ -62,20 +62,15 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	user, err := GetUser(post.Email, post.Password)
 
 	//return response
+	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
-		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(`{"code": 401, "msg": "User Unauthorized"}`))
+		w.Write([]byte(fmt.Sprintf(`{"accepted":false, "code": 401, "msg": %q}`, err.Error())))
 		return
 	}
 
 	w.WriteHeader(http.StatusAccepted)
-	page, err := os.ReadFile("front-end/pages/User/mainPage.html")
-	if err != nil {
-		UnavailablePage(w)
-		return
-	}
-	w.Write(page)
+	w.Write([]byte(fmt.Sprintf(`{"accepted":true, "code": 202, "msg": %q}`, err.Error())))
 	log.Println(user.Email, " just logged in")
 }
 
