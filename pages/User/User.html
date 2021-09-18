@@ -88,10 +88,16 @@
         </div>
 
         <div class="checkbox mb-3">
-          <div id="emailF" class="invalid-feedback">
+          <div id="emailF1" class="invalid-feedback">
             Please provide a valid email
           </div>
-          <div id="passF" class="invalid-feedback">
+          <div id="emailF2" class="invalid-feedback">
+            An account already exists for this email
+          </div>
+          <div id="passF1" class="invalid-feedback">
+            Please provide a valid password
+          </div>
+          <div id="passF2" class="invalid-feedback">
             Passwords don't match
           </div>
         </div>
@@ -102,40 +108,24 @@
       </div>
 
       <div id="signup2">
-        <div class="row g-0 py-2">
-          <div class="col">
-            <div class="form-floating">
-              <input type="text" class="form-control" id="floatingName" autocomplete="off">
-              <label for="floatingName">Name</label>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-floating">
-              <input type="text" class="form-control" id="floatingLastname" autocomplete="off">
-              <label for="floatingLastname">Surname</label>
-            </div>
-          </div>
+        <div class="checkbox mb-3">
+          <label>
+            <input id="ismale" type="checkbox" value="remember-me"> Male [v] / Female [ ]
+          </label>
         </div>
-
-        <div class="form-floating">
-          <input type="email" class="form-control" id="floatingEmail1" autocomplete="off">
-          <label for="floatingEmail">Email address</label>
+        <div class="checkbox mb-3">
+          <label>
+            <input id="isvacc" type="checkbox" value="remember-me"> Vaccinated (optional)
+          </label>
         </div>
         <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword1" autocomplete="off">
-          <label for="floatingPassword">Password</label>
-        </div>
-        <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword1" autocomplete="off">
-          <label for="floatingPassword">Password check (type it again)</label>
+          <input type="date" class="form-control" id="floatingDate" autocomplete="off">
+          <label for="floatingDate">Birth date</label>
         </div>
 
         <div class="checkbox mb-3">
-          <div id="emailF" class="invalid-feedback">
-            Please provide a valid email
-          </div>
-          <div id="passF" class="invalid-feedback">
-            Passwords don't match
+          <div id="dateF" class="invalid-feedback">
+            Please provide a valid birth date
           </div>
         </div>
       <button class="w-100 btn btn-lg btn-primary" type="button" onclick="signup()">Create account</button>

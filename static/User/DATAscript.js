@@ -51,16 +51,35 @@ async function checkLogin(code) {
 }
 /*######## LOGUP ########*/
 function presignup(){
-    var name=document.querySelector("#floatingName").value;
-    var surn=document.querySelector("#floatingLastname").value;
-    var email=document.querySelector("#floatingEmail1").value;
-    var pass=document.querySelector("#floatingPassword1").value;
+    var email=document.querySelector("#floatingEmail1");
+    var pass=document.querySelector("#floatingPassword1");
+    var pass1=document.querySelector("#floatingPassword2");
     
-    if(checksignup1(name,surn,email,pass)){
-        transition("signup1","signup2")
+    if(checksignup1(email,pass,pass1,checkemail())){
+        transition("signup1","signup2");
+    }
+}
+function signup(){
+    var name=document.querySelector("#floatingName").value;
+    var surname=document.querySelector("#floatingLastname").value;
+    var email=document.querySelector("#floatingEmail1").value;
+    var password=document.querySelector("#floatingPassword1").value;
+    var ismale=document.querySelector("#ismale").checked;
+    var isvacc=document.querySelector("#isvacc").checked;
+    var birthdate=document.querySelector("#floatingDate").value;
+    
+    if(checksignup2(birthdate)){
+        sendsignup(name,surname,email,password,ismale,isvacc,birthdate);
+        transition("signup","wallet");
     }
 }
 
 function checkemail(){
-    
+    //richiesta xml, vero se l'email è nuova, falso se l'email è già utilizzata
+    return true;
+}
+
+function sendsignup(name,surname,email,password,ismale,isvaccinated,birthdate){
+    //post xml dei dati signup
+    console.log("inviato")
 }
