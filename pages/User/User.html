@@ -58,51 +58,89 @@
       <img class="mb-4" src="..\..\static\]media\common\brand\purse.png" alt="" width="72" height="57">
       <h1 class="h3 mb-3 fw-normal">Sign up</h1>
 
-    
-      <div class="row g-0 py-2">
-        <div class="col">
-          <div class="form-floating">
-            <input type="text" class="form-control" id="floatingName" autocomplete="off">
-            <label for="floatingName">Name</label>
+      <div id="signup1">
+        <div class="row g-0 py-2">
+          <div class="col">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="floatingName" autocomplete="off">
+              <label for="floatingName">Name</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="floatingLastname" autocomplete="off">
+              <label for="floatingLastname">Surname</label>
+            </div>
           </div>
         </div>
-        <div class="col">
-          <div class="form-floating">
-            <input type="text" class="form-control" id="floatingLastname" autocomplete="off">
-            <label for="floatingLastname">Surname</label>
+
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingEmail1" autocomplete="off">
+          <label for="floatingEmail">Email address</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword1" autocomplete="off">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword2" autocomplete="off">
+          <label for="floatingPassword">Password check (type it again)</label>
+        </div>
+
+        <div class="checkbox mb-3">
+          <div id="emailF" class="invalid-feedback">
+            Please provide a valid email
+          </div>
+          <div id="passF" class="invalid-feedback">
+            Passwords don't match
           </div>
         </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="button" onclick="presignup()">Sign up</button>
+        <p id="gosignup" onclick="transition('signup','login')">I already have an account</p>
+      
       </div>
 
-      <div class="form-floating">
-        <input type="email" class="form-control" id="floatingEmail1" autocomplete="off">
-        <label for="floatingEmail">Email address</label>
-      </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword1" autocomplete="off">
-        <label for="floatingPassword">Password</label>
-      </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword1" autocomplete="off">
-        <label for="floatingPassword">Password check (type it again)</label>
-      </div>
-
-      <div class="checkbox mb-3">
-        <div id="emailF" class="invalid-feedback">
-          Please provide a valid email
+      <div id="signup2">
+        <div class="row g-0 py-2">
+          <div class="col">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="floatingName" autocomplete="off">
+              <label for="floatingName">Name</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="floatingLastname" autocomplete="off">
+              <label for="floatingLastname">Surname</label>
+            </div>
+          </div>
         </div>
-        <div id="passF" class="invalid-feedback">
-          Please provide a valid password
-        </div>
-      </div>
 
-      <div class="checkbox mb-3">
-        <label>
-          <input id="rememberMe" type="checkbox" value="remember-me"> Remember me
-        </label>
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingEmail1" autocomplete="off">
+          <label for="floatingEmail">Email address</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword1" autocomplete="off">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword1" autocomplete="off">
+          <label for="floatingPassword">Password check (type it again)</label>
+        </div>
+
+        <div class="checkbox mb-3">
+          <div id="emailF" class="invalid-feedback">
+            Please provide a valid email
+          </div>
+          <div id="passF" class="invalid-feedback">
+            Passwords don't match
+          </div>
+        </div>
+      <button class="w-100 btn btn-lg btn-primary" type="button" onclick="signup()">Create account</button>
+
       </div>
-      <button class="w-100 btn btn-lg btn-primary" type="button" onclick="login()">Sign in</button>
-      <p id="gosignup" onclick="transition('signup','login')">I already have an account</p>
     </form>
   </section>
   

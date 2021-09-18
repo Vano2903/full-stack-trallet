@@ -11,7 +11,6 @@ function login() {
     }
 };
 
-
 function getLoginData() {
     var email = document.getElementById("floatingEmail").value;
     var psw = document.getElementById("floatingPassword").value;
@@ -49,4 +48,19 @@ async function checkLogin(code) {
     } else {
         rejectlogin()
     }
+}
+/*######## LOGUP ########*/
+function presignup(){
+    var name=document.querySelector("#floatingName").value;
+    var surn=document.querySelector("#floatingLastname").value;
+    var email=document.querySelector("#floatingEmail1").value;
+    var pass=document.querySelector("#floatingPassword1").value;
+    
+    if(checksignup1(name,surn,email,pass)){
+        transition("signup1","signup2")
+    }
+}
+
+function checkemail(){
+    
 }
