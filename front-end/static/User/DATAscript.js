@@ -16,10 +16,9 @@ function login() {
     let password = document.querySelector("#floatingPassword");
     let email = document.querySelector("#floatingEmail");
 
-    if (loginCheck(email, password)) {
+    if(loginCheck(email, password)) {
         serverLogin(email, password);
         console.log("Richiesta inviata al server");
-
     }
 };
 
