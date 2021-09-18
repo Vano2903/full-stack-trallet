@@ -84,8 +84,18 @@
   </section>
 
 
-  <script src="/front-end\static\User\UIscript.js"></script>
-  <script src="/front-end\static\User\DATAscript.js"></script>
+  <script src="/static/User/UIscript.js"></script>
+  <script src="/static/User/DATAscript.js"></script>
+  <script>
+    var check = localStorage.getItem("rememberMe");
+    if (check) {
+      var localsUser = localStorage.getItem("user")
+      if (localsUser !== null) {
+        user = JSON.parse(localsUser)
+        checkLogin("def")
+      }
+    }
+  </script>
 </body>
 
 </html>

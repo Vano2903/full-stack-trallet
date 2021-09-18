@@ -1,23 +1,12 @@
 var user;
 
-document.readyState = function () {
-    var check = localStorage.getItem("rememberMe");
-    if (check) {
-        var localsUser = localStorage.getItem("user")
-        if (localsUser !== null) {
-            user = JSON.parse(localsUser)
-            checkLogin("def")
-        }
-    }
-};
-
 /*######## LOGIN #########*/
 function login() {
     let password = document.querySelector("#floatingPassword");
     let email = document.querySelector("#floatingEmail");
 
-    if(loginCheck(email, password)) {
-        serverLogin(email, password);
+    if (loginCheck(email, password)) {
+        checkLogin();
         console.log("Richiesta inviata al server");
     }
 };
@@ -51,7 +40,7 @@ async function checkLogin(code) {
     // document.getElementById("loader-wrapper").style.display = "none";
     if (resp.accepted) {
         if (document.getElementById('rememberMe').checked) {
-            localStorage.setItem("user", user)
+            localStorage.setItem("user", JSON.stringify(user))
             localStorage.setItem("rememberMe", true)
         } else {
             localStorage.setItem("rememberMe", false)

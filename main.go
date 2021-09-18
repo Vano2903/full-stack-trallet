@@ -70,7 +70,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusAccepted)
-	w.Write([]byte(fmt.Sprintf(`{"accepted":true, "code": 202, "msg": %q}`, err.Error())))
+	userJson, _ := json.Marshal(user)
+	w.Write([]byte(fmt.Sprintf(`{"accepted":true, "code": 202, "user": %s}`, userJson)))
 	log.Println(user.Email, " just logged in")
 }
 
@@ -143,8 +144,9 @@ func main() {
 	//statics
 	r.PathPrefix(statics.String()).Handler(http.StripPrefix(statics.String(), http.FileServer(http.Dir("front-end/static/"))))
 
+	r.HandleFunc(root.String(), LoginPageHandler).Methods("GET", "OPTIONS")
+
 	//user login area
-	r.HandleFunc(usersLogin.String(), LoginPageHandler).Methods("GET", "OPTIONS")
 	r.HandleFunc(usersLogin.String(), LoginHandler).Methods("POST", "OPTIONS")
 
 	//user customization area
