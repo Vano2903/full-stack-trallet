@@ -55,25 +55,27 @@ form{
 /*######## IMMMAGINI #########*/
 .card-wallet{
     background-image: url("https://i.imgur.com/T0zxy9d.png");
-    color: #f5cf2fbf;
+    color: #e76d17a8;
     width: 100%;
     max-width: 350px;
     height: 160px;
 }
 .card-check{
     background-image: url("https://i.imgur.com/YZ0y5Mb.png");
-    color: #6fcfb8;
-    width: 40%;
+    color: #0e994f80;
+    width: 80%;
     max-width: 350px;
+    height: 150px;
 }
 .card-newtravel{
     background-image: url("https://i.imgur.com/rIFaK5m.png");
-    color: #6fcfb8;
-    width: 40%;
+    color: #0e994f80;
+    width: 100%;
     max-width: 350px;
     height: 100px;
 }
 .card-travel{
     background-image: url("https://i.imgur.com/qysrjqA.png");
-    color: #6fcfb8;
+    color: #0e994f80;
+    height: 100px;
 }
