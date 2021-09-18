@@ -1,11 +1,20 @@
 /*######## BASE #########*/
+screen.orientation.lock('portrait');
+//not to mess up while scanning a code
+
+//demo start page
+transition("signup", "documents");
+
 function transition(from, to) {
     document.querySelector("#" + from).style.opacity = 0;
     setTimeout(() => {
-        document.querySelector("#" + to).style.display = "block";
         document.querySelector("#" + from).style.display = "none";
-        setTimeout(() => { document.querySelector("#" + to).style.opacity = 1; }, 1);
-    }, 800);
+        document.querySelector("#" + to).style.opacity = 0;
+        document.querySelector("#" + to).style.display = "block";
+    }, 600);
+    setTimeout(() => {
+        document.querySelector("#" + to).style.opacity = 1;
+    }, 700);
 }
 /*######## login #########*/
 function loginCheck(email, password) {
@@ -38,7 +47,6 @@ function loginCheck(email, password) {
         document.querySelector("#login > form > button").disabled=true;
         return true;
     } else return false;
-
 }
 function acceptlogin() {
     transition("login", "wallet");
@@ -97,3 +105,18 @@ function checksignup2(birthdate){
     //aggiungere il controllo data
     return true;
 }
+/*######## logout #########*/
+function logoutconfirm(x){
+    if(x){
+       document.querySelector("#logoutconfirm").style.display="flex";
+       console.log("vedi");
+    } else {
+    document.querySelector("#logoutconfirm").style.display="none";
+    console.log("nasc");
+    }
+};
+function logout(){
+    //logout
+    //cancello i dati
+    location.reload();
+};

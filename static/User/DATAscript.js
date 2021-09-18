@@ -49,7 +49,7 @@ async function checkLogin(code) {
         rejectlogin()
     }
 }
-/*######## LOGUP ########*/
+/*######## SIGNUP ########*/
 function presignup(){
     var email=document.querySelector("#floatingEmail1");
     var pass=document.querySelector("#floatingPassword1");
@@ -82,4 +82,20 @@ function checkemail(){
 function sendsignup(name,surname,email,password,ismale,isvaccinated,birthdate){
     //post xml dei dati signup
     console.log("inviato")
+}
+/*######## SETUP HOMEPAGE #########*/
+setuphomepage();
+
+function setuphomepage(){
+    //se ho viaggi in programma
+    if(true){
+        //se mancano dei documenti
+        if(true){
+            document.querySelector("#c_check").style.display="block";
+        } else {
+            document.querySelector("#c_travel").style.display="block";
+        }
+    } else { //se non ho viaggi in programma
+        document.querySelector("#c_newtravel").style.display="block";
+    }
 }

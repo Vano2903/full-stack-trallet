@@ -16,7 +16,7 @@ section{
   height: 100%;
   display: none;
   opacity: 0;
-  transition: 0.5s;
+  transition: 0.5s opacity;
 }
 /*######## FONT #########*/
 body,h1 {
@@ -28,10 +28,6 @@ form{
 }
 .btn{
     border-width: 3px;
-}
-.form-signin input[type="password"] {
-    margin-bottom: 0!important;
-    border-radius: 0!important;
 }
 /*######## COLORI #########*/
 :root {
