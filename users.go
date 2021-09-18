@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"reflect"
 	"time"
 
 	timex "github.com/icza/gox/timex"
@@ -32,11 +31,6 @@ type User struct {
 	BornDate       primitive.DateTime `bson:"bornDate, omitempty" json:"bornDate, omitempty"`
 	Documents      []Document         `bson:"documents, omitempty" json:"documents, omitempty"`
 	// Travels        []Travel           `bson:"travels, omitempty" json:"travels, omitempty"`
-}
-
-//check if all the structure is empty
-func (x User) IsStructureEmpty() bool {
-	return reflect.DeepEqual(x, User{})
 }
 
 type Document struct {
@@ -88,19 +82,10 @@ func ExistUser(email string) (bool, error) {
 		return false, err
 	}
 
-	if len(userFound) != 0 {
-		
+	if len(userFound) == 0 {
+		return false, nil
 	}
-
-	//check if user exist
-	if len(userFound) != 0 {
-		if userFound[0].Email == email {
-			return true, nil
-		}
-		return User{}, errors.New("incorrect credentials")
-	} else {
-		return User{}, errors.New("no user found")
-	}
+	return true, nil
 }
 
 //check if user exist in database and will return empty struct if not found, on the other hand will return the User informations
@@ -136,11 +121,15 @@ func AddUser(name, lastName, email, password, pfp string, bornDate primitive.Dat
 		return "", errors.New("uncorrect/uncomplete credentials to create the user")
 	}
 	//check if not already registered
-	found, err := GetUser(email, password)
+	found, err := ExistUser(email)
+	if err != nil {
+		return "", err
+	}
 
-	if !found.IsStructureEmpty() {
+	if found {
 		return "", errors.New("user already exist")
 	}
+
 	if pfp == "" {
 		pfp = "https://avatars.dicebear.com/api/identicon/" + name + lastName + ".svg"
 	}
