@@ -1,5 +1,5 @@
 /*######## BASE #########*/
-#login{
+#signup{
   display: block;
   opacity: 1;
 }
@@ -12,7 +12,8 @@
   padding-top:50px;
 }
 .form-signin .checkbox {
-  font-weight: 400;
+  font-weight: 500;
+  cursor: pointer;
 }
 .form-signin .form-floating:focus-within {
   z-index: 2;
@@ -27,7 +28,16 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-/*### sign up ###*/
+#gosignup{
+  margin-top: 0.5em;
+  text-decoration: underline;
+  color: #a7a7a7;
+  cursor:pointer;
+}
+#gosignup:hover{
+  color: #7c7c7c;
+}
+/*### sigrgb(134, 134, 134)#*/
 
 /*### wallet ###*/
 #wallet{

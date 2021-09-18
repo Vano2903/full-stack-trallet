@@ -29,6 +29,10 @@ form{
 .btn{
     border-width: 3px;
 }
+.form-signin input[type="password"] {
+    margin-bottom: 0!important;
+    border-radius: 0!important;
+}
 /*######## COLORI #########*/
 :root {
     --theme-color: #5be99c;
