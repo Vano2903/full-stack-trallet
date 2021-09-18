@@ -30,11 +30,10 @@ function loginCheck(email, password) {
     } else {
         password.classList.remove("is-invalid");
         document.querySelector("#passF").style.display = "none";
-        passok = 0;
+        passok = 1;
     }
-    if (emailok && passok) {
-        return true;
-    } else return false;
+    if (emailok && passok) return true;
+    else return false;
 
 }
 function acceptlogin() {
