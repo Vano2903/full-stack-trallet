@@ -43,7 +43,7 @@ type Post struct {
 }
 
 func LoginPageHandler(w http.ResponseWriter, r *http.Request) {
-	home, err := os.ReadFile("front-end/User/login.html")
+	home, err := os.ReadFile("front-end/pages/User/login.html")
 	if err != nil {
 		UnavailablePage(w)
 		return
@@ -70,7 +70,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusAccepted)
-	page, err := os.ReadFile("pages/User/mainPage.html")
+	page, err := os.ReadFile("front-end/pages/User/mainPage.html")
 	if err != nil {
 		UnavailablePage(w)
 		return
@@ -79,10 +79,10 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println(user.Email, " just logged in")
 }
 
+//handler that let user register to the database
 func AddUserHandler(w http.ResponseWriter, r *http.Request) {
 	var post User
 
-	//read post body
 	_ = json.NewDecoder(r.Body).Decode(&post)
 
 	code, err := AddUser(post.Name, post.LastName, post.Email, post.Password, "", post.BornDate)
@@ -146,7 +146,7 @@ func main() {
 	//router
 	r := mux.NewRouter()
 	//statics
-	r.PathPrefix(statics.String()).Handler(http.StripPrefix(statics.String(), http.FileServer(http.Dir("static/"))))
+	r.PathPrefix(statics.String()).Handler(http.StripPrefix(statics.String(), http.FileServer(http.Dir("front-end/static/"))))
 
 	//user login area
 	r.HandleFunc(usersLogin.String(), LoginPageHandler).Methods("GET", "OPTIONS")
@@ -158,6 +158,7 @@ func main() {
 	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})
 	methodsOk := handlers.AllowedMethods([]string{"GET", "POST"})
+
 	log.Println("starting on", ":"+port)
 	log.Fatal(http.ListenAndServe(":"+port, handlers.CORS(originsOk, headersOk, methodsOk)(r)))
 }

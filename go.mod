@@ -1,5 +1,6 @@
 module github.com/Vano2903/full-stack
 
+// +heroku goVersion go1.16.1
 go 1.16
 
 require (
