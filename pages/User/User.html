@@ -151,7 +151,7 @@
         <p>Right here, ready to use</p>
       </div>
       <hr>
-      <div id="c_newtravel" class="card card-newtravel">
+      <div id="c_newtravel" onclick="transition('wallet','newtravel')" class="card card-newtravel">
         <p>Travel</p>
         <p>Plan a new adventure</p>
       </div>
@@ -200,6 +200,43 @@
       <h2 onclick="adddoc('swab')">Swab</h2>
     </div>
     <input type="file" id="inputFile">
+  </section>
+
+  <section id="newtravel">
+    <h1 id="traveltit">Your new <b class="theme-color">Travel</b></h1>
+
+    <div id="logo" onclick="transition('newtravel','wallet')">
+      <p>Back to</p>
+      <img src="..\..\static\]media\common\brand\purseFAV.png">
+    </div>
+
+    <div class="docholder" style="height: 50%;">
+      <form style="width: 80%; height:50%;margin-top: 6em;">
+        <div id="signup1">
+          <div class="row g-0 py-2">
+            <div class="col">
+              <div class="form-floating">
+                <select class="form-control" id="travelStart" disabled="true">
+                <option>Bergamo Orio Al Serio</option>
+                </select>
+                <label for="travelStart">From</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating">
+                <select type="text" class="form-control" id="travelDestination">
+                  <option>Paris</option>
+                </select>
+                <label for="travelDestination">To</label>
+              </div>
+            </div>
+          </div>
+  
+          <button class="w-100 btn btn-lg btn-primary" type="button" onclick="newtravel(); transition('newtravel','wallet');">Add</button>
+  
+      </form>
+    </div>
+
   </section>
 
   <div id="logoutconfirm">
