@@ -9,10 +9,12 @@ Trallet is your simple virtual document holder that makes your life easier. In a
 2. Clone the repository and place it [inside the $GOPATH](https://golang.org/doc/gopath_code)
 
 ## Usage
-1. Move to the main project folder _(where you find the main.go file)_ and start the program by running `go run *.go`.
+1. Go to the [Heroku page of the project](https://trallet.herokuapp.com/) and start your experience with the first demo of our web-app!
 
 ## Guide
-
+Register (or login if you already have an account) and access the main page of Trallet.
+Inside you can move to the Wallet section where you will have access to all your uploaded documents and their information.
+In beta, on the other hand, you can reach the travel portal at the following [link](https: //trallet.herokuapp.com/gate/manager).
 
 ## Project informations
 **Name:** Trallet | Your Travel Wallet
