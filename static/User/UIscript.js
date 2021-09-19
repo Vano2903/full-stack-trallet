@@ -56,6 +56,10 @@ function acceptlogin() {
     $("#login").css('display', 'none');
     $("#profile > p").text(user.name)
     $("#profile > img").attr("src", user.profilePicture)
+    $("#profile2 > p").text(user.name)
+    $("#profile2 > img").attr("src", user.profilePicture)
+
+    genDocuments(user.documents)
 }
 
 function rejectlogin() {
@@ -136,8 +140,35 @@ let lastPressed;
 
 $("#inputFile").css('display', 'none');
 
-function docrefresh() {
-    //a
+function genDocuments(array) {
+    let high = document.querySelector("#documents > #high")
+    high.innerHTML = ""
+    array.forEach(doc => {
+        let div = document.createElement("div")
+        div.setAttribute("id", doc.id)
+        div.setAttribute("class", "doc")
+        let p = document.createElement("p")
+        p.innerHTML = doc.title
+        let img = document.createElement("img")
+        img.setAttribute("src", doc.url)
+        div.appendChild(p)
+        div.appendChild(img)
+        high.appendChild(div)
+    });
+}
+
+async function docrefresh() {
+    const res = await fetch('/document/get/all', {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    });
+
+    const documents = await res.json();
+    genDocuments(documents)
 }
 
 function adddoctoggle() {
@@ -153,6 +184,7 @@ function adddoc(type) {
     $("#inputFile").trigger('click');
 }
 
-$("#inputFile").on('change', function () {
-    uploadInfo(lastPressed)
+$("#inputFile").on('change', async function () {
+    await uploadInfo(lastPressed)
+    docrefresh()
 });

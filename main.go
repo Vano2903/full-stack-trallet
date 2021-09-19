@@ -282,7 +282,7 @@ func main() {
 	//socument section
 	r.HandleFunc(fileupload.String(), UploadFileHandler).Methods("POST", "OPTIONS")
 	r.HandleFunc(infoUpload.String(), UploadInformationsHandler).Methods("POST", "OPTIONS")
-	r.HandleFunc(getDocument.String(), GetDocumentHandler).Methods("GET", "OPTIONS")
+	r.HandleFunc(getDocument.String(), GetDocumentHandler).Methods("POST", "OPTIONS")
 
 	//user customization area
 	// r.HandleFunc(userCustomization.String(), UserCustomizationHandler).Methods("POST", "OPTIONS")
