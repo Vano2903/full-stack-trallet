@@ -1,28 +1,83 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Read Text File</title>
-    </head>
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e49224">
+  <link rel="icon" type="image/png" href="..\..\static\]media\common\brand\purseFAV.png"/>
+  <link rel="stylesheet" href="..\..\static\]media\common\fonts.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <!-- File esterni -->
+
+  <link rel="stylesheet" href="..\..\static/]media/common/custom.css">
+  <link rel="stylesheet" href="..\..\static\Gates\GateTotem\style.css">
+
+  <title>Trallet displays - DEMO ADMIN</title>
+</head>
 
 <body>
-    <input type="file" name="inputfile" id="inputfile">
-    <br>
 
-    <pre id="output"></pre>
+  <section id="wallet">
+    <h1 id="apptitle">Your <b class="theme-color">Trallet</b> displays</h1>
 
-    <script type="text/javascript">
-        document.getElementById('inputfile')
-            .addEventListener('change', function () {
+    <div id="profile">
+      <p>DEMO ADMIN Aeroprorto di Bergamo</p>
+      <img src="..\..\static\]media\common\elements\generic_profilepic.png">
+    </div>
 
-                var fr = new FileReader();
-                fr.onload = function () {
-                    document.getElementById('output')
-                        .textContent = fr.result;
-                }
+    <div id="high" class="cardholder">
+      <h1>Gates</h1>
+      <hr>
+    </div>
+  </section>
 
-                fr.readAsText(this.files[0]);
-            })
-    </script>
+  <section id="documents">
+    <h1 id="wallettit">Your <b class="theme-color">Wallet</b></h1>
+
+    <div id="profile2" onclick="logoutconfirm(1)">
+      <p>Username</p>
+      <img src="..\..\static\]media\common\elements\generic_profilepic.png">
+    </div>
+
+    <div id="logo" onclick="transition('documents','wallet')">
+      <p>Back to</p>
+      <img src="..\..\static\]media\common\brand\purseFAV.png">
+    </div>
+
+    <div id="high" class="docholder">
+      <div id="c_wallet" class="doc">
+        <p>Green Pass</p>
+        <img src="..\..\static\]media\greenFacSimile.PNG">
+      </div>
+    </div>
+
+    <div id="adddoc" onclick="adddoctoggle()">
+      <h1>+</h1>
+      <h2 onclick="adddoc('id')">ID Card</h2>
+      <h2 onclick="adddoc('pasp')">Pasport</h2>
+      <h2 onclick="adddoc('ticket')">Boarding ticket</h2>
+      <h2 onclick="adddoc('visa')">Visas and auths</h2>
+      <h2 onclick="adddoc('green')">Green Pass</h2>
+      <h2 onclick="adddoc('swab')">Swab</h2>
+    </div>
+  </section>
+
+
+  <script src="..\..\static/Gates/GateTotem/UIscript.js"></script>
+  <script src="..\..\static/Gates/GateTotem/DATAscript.js"></script>
+  <script>
+    var check = localStorage.getItem("rememberMe");
+    if (check) {
+      var localsUser = localStorage.getItem("user")
+      if (localsUser !== null) {
+        user = JSON.parse(localsUser)
+        checkLogin("def");
+      }
+    }
+  </script>
 </body>
 
 </html>
