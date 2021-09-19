@@ -61,17 +61,27 @@ function presignup() {
         transition("signup1", "signup2");
     }
 }
-function signup() {
+
+function calculateAge(birthday) { // birthday is a date
+    var ageDifMs = Date.now() - birthday;
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    var age = Math.abs(ageDate.getUTCFullYear() - 1970);
+    return age >= 18
+}
+
+async function signup() {
     var name = document.querySelector("#floatingName").value;
     var surname = document.querySelector("#floatingLastname").value;
     var email = document.querySelector("#floatingEmail1").value;
     var password = document.querySelector("#floatingPassword1").value;
-    var ismale = document.querySelector("#ismale").checked;
+    // var isMinor = document.querySelector("#isMinor").checked;
     var isvacc = document.querySelector("#isvacc").checked;
     var birthdate = document.querySelector("#floatingDate").value;
 
+    let dates = birthdate.split("-")
+
     if (checksignup2(birthdate)) {
-        sendsignup(name, surname, email, password, ismale, isvacc, birthdate);
+        await sendsignup(name, surname, email, password, calculateAge(new Date(dates[2], dates[1], dates[0])), isvacc, birthdate);
         transition("signup", "wallet");
     }
 }
@@ -81,9 +91,18 @@ function checkemail() {
     return true;
 }
 
-function sendsignup(name, surname, email, password, ismale, isvaccinated, birthdate) {
-    //post xml dei dati signup
-    console.log("inviato")
+async function sendsignup(name, surname, email, password, isMinor, isvaccinated, birthdate) {
+    let body = { name: name, lastName: surname, email: email, password: password, isMinor: isMinor, isVaccinated: isvaccinated, bornDate: birthdate }
+    const res = await fetch('/users/singup', {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    });
+    const resp = await res.json();
+    console.log(resp)
 }
 /*######## SETUP HOMEPAGE #########*/
 setuphomepage();
