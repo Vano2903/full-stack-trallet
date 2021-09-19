@@ -134,6 +134,6 @@ function adddoctoggle(){
         document.querySelector("#adddoc>h1").innerHTML="+";
 }
 function adddoc(type){
-    //type can be: id, pasp, tiket, visa, green, swab
+    //type can be: id, pasp, ticket, visa, green, swab
     console.log("aggiungi "+type);
 }
