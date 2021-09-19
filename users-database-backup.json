@@ -1,0 +1,110 @@
+[{
+  "_id": {
+    "$oid": "6145066968d74ea47fbd993a"
+  },
+  "name": "davide",
+  "lastName": "vanoncini",
+  "email": "davidevanoncini2003@gmail.com",
+  "password": "vanovano",
+  "profilePicture": "https://avatars.dicebear.com/api/identicon/davidevanoncini.svg",
+  "isVaccinated": false,
+  "isMinor": true,
+  "bornDate": {
+    "$date": "2003-10-01T00:00:00Z"
+  },
+  "documents": [
+    {
+      "id": "1yM8MgXoUvn7krA4PyQZOgmXJn7",
+      "title": "blue.jpg",
+      "url": "https://files.catbox.moe/z69n1v.jpg",
+      "type": "id",
+      "expiringDate": {
+        "$date": "1970-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "1yMMDS1V9SQniPWx5RdRxSR611L",
+      "title": "cutie.png",
+      "url": "https://files.catbox.moe/h3a3y5.png",
+      "type": "id",
+      "expiringDate": {
+        "$date": "1970-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "1yMMqUQNkDFM2dqAPToSPakQ1QQ",
+      "title": "4.0.png",
+      "url": "https://files.catbox.moe/tkmgmw.png",
+      "type": "id",
+      "expiringDate": {
+        "$date": "1970-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "1yMN2zqy7DkrKhEXUIpaKgABSjh",
+      "title": "album_1euo41591.gif",
+      "url": "https://files.catbox.moe/65rp70.gif",
+      "type": "id",
+      "expiringDate": {
+        "$date": "1970-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "1yMNLQgSnKUlKZynAGXlFc3qYQn",
+      "title": "sa bliss uwu.jpg",
+      "url": "https://files.catbox.moe/hwms8j.jpg",
+      "type": "id",
+      "expiringDate": {
+        "$date": "1970-01-01T00:00:00Z"
+      }
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "61473a45dfd13570750a8953"
+  },
+  "name": "Fra",
+  "lastName": "Dand",
+  "email": "email@gmail.com",
+  "password": "passa",
+  "profilePicture": "https://avatars.dicebear.com/api/identicon/FraDand.svg",
+  "isVaccinated": false,
+  "isMinor": false,
+  "bornDate": {
+    "$date": "1970-01-01T00:00:00Z"
+  },
+  "documents": [
+    {
+      "id": "1yMOWfti6ahkSYGJZZYHMTGchgj",
+      "title": "id-card.png",
+      "url": "https://files.catbox.moe/vtjjam.png",
+      "type": "id",
+      "expiringDate": {
+        "$date": "1970-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "1yMOeLcRpABSaHHSCCtkHqIvBKE",
+      "title": "cover-travel.png",
+      "url": "https://files.catbox.moe/ezipl8.png",
+      "type": "green",
+      "expiringDate": {
+        "$date": "1970-01-01T00:00:00Z"
+      }
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "614745091a17cfd40706ea1f"
+  },
+  "name": "Andrea",
+  "lastName": "Morandi",
+  "email": "andreamorandi2612@gmail.com",
+  "password": "Amorandi_26122002",
+  "profilePicture": "https://avatars.dicebear.com/api/identicon/AndreaMorandi.svg",
+  "isVaccinated": false,
+  "isMinor": false,
+  "bornDate": {
+    "$date": "1970-01-01T00:00:00Z"
+  }
+}]
