@@ -54,6 +54,8 @@ function acceptlogin() {
     transition("login", "wallet");
     $("#signup").css('display', 'none');
     $("#login").css('display', 'none');
+    $("#profile > p").text(user.name)
+    $("#profile > img").attr("src", user.profilePicture)
 }
 
 function rejectlogin() {

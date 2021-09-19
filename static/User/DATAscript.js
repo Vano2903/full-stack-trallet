@@ -36,6 +36,7 @@ async function checkLogin(code) {
         body: JSON.stringify(user)
     });
     const resp = await res.json();
+    console.log(resp)
     // document.getElementById("loader-wrapper").style.display = "none";
     if (resp.accepted) {
         if (document.getElementById('rememberMe').checked) {
@@ -44,6 +45,7 @@ async function checkLogin(code) {
         } else {
             localStorage.setItem("rememberMe", false)
         }
+        user = resp.user;
         acceptlogin();
         console.log("accepted")
     } else {
