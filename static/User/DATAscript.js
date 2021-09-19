@@ -50,52 +50,90 @@ async function checkLogin(code) {
     }
 }
 /*######## SIGNUP ########*/
-function presignup(){
-    var email=document.querySelector("#floatingEmail1");
-    var pass=document.querySelector("#floatingPassword1");
-    var pass1=document.querySelector("#floatingPassword2");
-    
-    if(checksignup1(email,pass,pass1,checkemail())){
-        transition("signup1","signup2");
+function presignup() {
+    var email = document.querySelector("#floatingEmail1");
+    var pass = document.querySelector("#floatingPassword1");
+    var pass1 = document.querySelector("#floatingPassword2");
+
+    if (checksignup1(email, pass, pass1, checkemail())) {
+        transition("signup1", "signup2");
     }
 }
-function signup(){
-    var name=document.querySelector("#floatingName").value;
-    var surname=document.querySelector("#floatingLastname").value;
-    var email=document.querySelector("#floatingEmail1").value;
-    var password=document.querySelector("#floatingPassword1").value;
-    var ismale=document.querySelector("#ismale").checked;
-    var isvacc=document.querySelector("#isvacc").checked;
-    var birthdate=document.querySelector("#floatingDate").value;
-    
-    if(checksignup2(birthdate)){
-        sendsignup(name,surname,email,password,ismale,isvacc,birthdate);
-        transition("signup","wallet");
+function signup() {
+    var name = document.querySelector("#floatingName").value;
+    var surname = document.querySelector("#floatingLastname").value;
+    var email = document.querySelector("#floatingEmail1").value;
+    var password = document.querySelector("#floatingPassword1").value;
+    var ismale = document.querySelector("#ismale").checked;
+    var isvacc = document.querySelector("#isvacc").checked;
+    var birthdate = document.querySelector("#floatingDate").value;
+
+    if (checksignup2(birthdate)) {
+        sendsignup(name, surname, email, password, ismale, isvacc, birthdate);
+        transition("signup", "wallet");
     }
 }
 
-function checkemail(){
+function checkemail() {
     //richiesta xml, vero se l'email è nuova, falso se l'email è già utilizzata
     return true;
 }
 
-function sendsignup(name,surname,email,password,ismale,isvaccinated,birthdate){
+function sendsignup(name, surname, email, password, ismale, isvaccinated, birthdate) {
     //post xml dei dati signup
     console.log("inviato")
 }
 /*######## SETUP HOMEPAGE #########*/
 setuphomepage();
 
-function setuphomepage(){
+function setuphomepage() {
     //se ho viaggi in programma
-    if(true){
+    if (true) {
         //se mancano dei documenti
-        if(true){
-            document.querySelector("#c_check").style.display="block";
+        if (true) {
+            document.querySelector("#c_check").style.display = "block";
         } else {
-            document.querySelector("#c_travel").style.display="block";
+            document.querySelector("#c_travel").style.display = "block";
         }
     } else { //se non ho viaggi in programma
-        document.querySelector("#c_newtravel").style.display="block";
+        document.querySelector("#c_newtravel").style.display = "block";
     }
+}
+
+/*######## UPLOAD DOCUMENTS #########*/
+
+async function uploadFile() {
+    const formData = new FormData();
+    let file = document.getElementById("inputFile").files[0]
+    formData.append("document", file);
+    const response = await fetch("/upload/file", {
+        method: 'POST',
+        body: formData
+    });
+    let resp = await response.json();
+    console.log(resp)
+    return {
+        id: resp.fileID, name: file.name
+    }
+}
+
+async function uploadInfo(type) {
+    let fileData = await uploadFile()
+    console.log(fileData)
+    let body = {
+        user: user,
+        documentInfo: {
+            id: fileData.id,
+            title: fileData.name,
+            type: type
+        }
+    }
+    console.log(body)
+
+    const response = await fetch("/upload/info/" + fileData.id, {
+        method: 'POST',
+        body: JSON.stringify(body)
+    });
+    let resp = await response.json();
+    console.log(resp)
 }

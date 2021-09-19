@@ -18,7 +18,7 @@ function transition(from, to) {
 }
 /*######## login #########*/
 function loginCheck(email, password) {
-    var emailok;var passok;
+    var emailok; var passok;
 
     if (email.value == "") {
         email.classList.add("is-invalid");
@@ -44,7 +44,7 @@ function loginCheck(email, password) {
         passok = 1;
     }
     if (emailok && passok) {
-        document.querySelector("#login > form > button").disabled=true;
+        document.querySelector("#login > form > button").disabled = true;
         return true;
     } else return false;
 }
@@ -55,7 +55,7 @@ function rejectlogin() {
     console.log("rifiutato")
 }
 /*######## signup #########*/
-function checksignup1(email,pass,pass1,newemail) {
+function checksignup1(email, pass, pass1, newemail) {
     var emailok; var passok;
 
     if (email.value == "") {
@@ -67,7 +67,7 @@ function checksignup1(email,pass,pass1,newemail) {
         email.classList.add("is-invalid");
         document.querySelector("#emailF1").style.display = "inherit";
         emailok = 0;
-    } else if(!newemail){
+    } else if (!newemail) {
         email.classList.add("is-invalid");
         document.querySelector("#emailF2").style.display = "inherit";
         emailok = 0;
@@ -94,46 +94,57 @@ function checksignup1(email,pass,pass1,newemail) {
     } else {
         pass.classList.remove("is-invalid");
         document.querySelector("#passF1").style.display = "none";
-        if(passok) passok = 1; else passok=0;
+        if (passok) passok = 1; else passok = 0;
     }
     if (emailok && passok && newemail) {
-        document.querySelector("#signup1 > button").disabled=true;
+        document.querySelector("#signup1 > button").disabled = true;
         return true;
     } else return false;
 }
-function checksignup2(birthdate){
+function checksignup2(birthdate) {
     //aggiungere il controllo data
     return true;
 }
 /*######## logout #########*/
-function logoutconfirm(x){
-    if(x){
-       document.querySelector("#logoutconfirm").style.display="flex";
-       console.log("vedi");
+function logoutconfirm(x) {
+    if (x) {
+        document.querySelector("#logoutconfirm").style.display = "flex";
+        console.log("vedi");
     } else {
-    document.querySelector("#logoutconfirm").style.display="none";
-    console.log("nasc");
+        document.querySelector("#logoutconfirm").style.display = "none";
+        console.log("nasc");
     }
 };
-function logout(){
+function logout() {
     //logout
     //cancello i dati
     location.reload();
 };
 
 /*######## add document #########*/
-function docrefresh(){
+let lastPressed;
+
+$("#inputFile").css('display', 'none');
+
+function docrefresh() {
     //a
 }
 
-function adddoctoggle(){
+function adddoctoggle() {
     document.querySelector("#adddoc").classList.toggle("open");
-    if(document.querySelector("#adddoc").classList.contains("open"))
-        document.querySelector("#adddoc>h1").innerHTML="-";
+    if (document.querySelector("#adddoc").classList.contains("open"))
+        document.querySelector("#adddoc>h1").innerHTML = "-";
     else
-        document.querySelector("#adddoc>h1").innerHTML="+";
+        document.querySelector("#adddoc>h1").innerHTML = "+";
 }
-function adddoc(type){
+function adddoc(type) {
     //type can be: id, pasp, ticket, visa, green, swab
-    console.log("aggiungi "+type);
+    // console.log("aggiungi " + type);
+    lastPressed = type;
+    $("#inputFile").trigger('click');
+
 }
+
+$("#inputFile").on('change', function () {
+    uploadInfo(lastPressed)
+});
