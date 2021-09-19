@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -11,19 +13,22 @@ import (
 	"github.com/go-yaml/yaml"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/segmentio/ksuid"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-type config struct {
-	Uri string `yaml:"mongo_uri"` //atlas mongodb uri
-}
-
 var conf config
+
+type config struct {
+	Uri  string `yaml:"mongo_uri"` //atlas mongodb uri
+	Hash string `yaml:"hash"`      //catbox user hash
+}
 
 //init all the connection to the database and get the api key and db uri
 func init() {
 	uri := os.Getenv("mongo_uri")
-	if uri == "" {
+	hash := os.Getenv("hash")
+	if uri == "" || hash == "" {
 		dat, _ := ioutil.ReadFile("config.yaml")
 		err := yaml.Unmarshal([]byte(dat), &conf)
 		if err != nil {
@@ -31,19 +36,28 @@ func init() {
 		}
 	} else {
 		conf.Uri = uri
+		conf.Hash = hash
 	}
+
 	if err := ConnectToDatabaseUsers(); err != nil {
 		log.Fatal(err)
 	}
 }
 
-type Post struct {
-	Email    string `json:"email, omitempty"`    //email of the user
-	Password string `json:"password, omitempty"` //password of the user
+type PostInfo struct {
+	User     User     `json:"user, omitempty"`
+	Document Document `json:"document, omitempty"`
 }
 
+type File struct {
+	Url string `json:"url, omitempty"`
+	ID  string `json:"id, omitempty"`
+}
+
+var files []File
+
 func LoginPageHandler(w http.ResponseWriter, r *http.Request) {
-	home, err := os.ReadFile("front-end/pages/User/User.html")
+	home, err := os.ReadFile("pages/User/User.html")
 	if err != nil {
 		UnavailablePage(w)
 		return
@@ -72,7 +86,25 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusAccepted)
 	userJson, _ := json.Marshal(user)
 	w.Write([]byte(fmt.Sprintf(`{"accepted":true, "code": 202, "user": %s}`, userJson)))
-	log.Println(user.Email, " just logged in")
+	log.Println(user.Email, "just logged in")
+}
+
+func CheckMailHandler(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	for k, v := range r.Form {
+		switch k {
+		case "email":
+			if len(v) != 0 {
+				PrintErr(w, "must query only one email at the time")
+			}
+			found, err := ExistUser(v[0])
+			if err != nil {
+				PrintInternalErr(w, err.Error())
+			}
+			w.Header().Set("Content-Type", "application/json")
+			w.Write([]byte(fmt.Sprintf(`{"found": %t}`, found)))
+		}
+	}
 }
 
 //handler that let user register to the database
@@ -90,7 +122,69 @@ func AddUserHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusCreated)
 	w.Write([]byte(`{"status": 201, "msg": "user successfully created"}`))
-	log.Println(fmt.Sprintf("new user logged in %s", code))
+	log.Println(fmt.Sprintf("new user created: %s", code))
+}
+
+func UploadFileHandler(w http.ResponseWriter, r *http.Request) {
+	r.ParseMultipartForm(10 << 20)
+	file, handler, err := r.FormFile("document")
+
+	if err != nil {
+		fmt.Println("Error Retrieving the File")
+		fmt.Println(err)
+		return
+	}
+
+	defer file.Close()
+	// fmt.Printf("Uploaded File: %+v\n", handler.Filename)
+	// fmt.Printf("File Size: %+v\n", handler.Size)
+	// fmt.Printf("MIME Header: %+v\n", handler.Header)
+	buf := bytes.NewBuffer(nil)
+	if _, err := io.Copy(buf, file); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	if _, err := io.Copy(buf, file); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	url, err := UploadFile(buf.Bytes(), handler.Filename)
+	id := ksuid.New()
+	w.WriteHeader(http.StatusAccepted)
+	w.Write([]byte(fmt.Sprintf(`{"code": 202, "fileID": "%s"}`, id.String())))
+
+	files = append(files, File{url, id.String()})
+}
+
+func UploadInformationsHandler(w http.ResponseWriter, r *http.Request) {
+	kuid := mux.Vars(r)["kuid"]
+	for i, file := range files {
+		if file.ID == kuid {
+			var postData PostInfo
+			_ = json.NewDecoder(r.Body).Decode(&postData)
+
+			user, err := GetUser(postData.User.Email, postData.User.Password)
+			if err != nil {
+				PrintErr(w, err.Error())
+			}
+			postData.Document.Url = file.Url
+			postData.Document.Url = file.ID
+			user.Documents = append(user.Documents, postData.Document)
+
+			w.WriteHeader(http.StatusAccepted)
+			w.Write([]byte(`{"status": 202, "msg": "document added successfully"}`))
+
+			update := bson.M{"documents": user.Documents}
+			err = UpdateUser(postData.User.Email, postData.User.Password, update)
+			if err != nil {
+				PrintInternalErr(w, err.Error())
+				return
+			}
+			files = append(files[:i], files[i+1:]...)
+		}
+	}
+	PrintErr(w, "invalid KUID")
 }
 
 //will check if the url has "password" or "pfp" in it and will use a post to check the user
@@ -142,12 +236,18 @@ func main() {
 	//router
 	r := mux.NewRouter()
 	//statics
-	r.PathPrefix(statics.String()).Handler(http.StripPrefix(statics.String(), http.FileServer(http.Dir("front-end/static/"))))
+	r.PathPrefix(statics.String()).Handler(http.StripPrefix(statics.String(), http.FileServer(http.Dir("static/"))))
 
+	//root
 	r.HandleFunc(root.String(), LoginPageHandler).Methods("GET", "OPTIONS")
 
-	//user login area
+	//user area
 	r.HandleFunc(usersLogin.String(), LoginHandler).Methods("POST", "OPTIONS")
+	r.HandleFunc(checkEmail.String(), CheckMailHandler).Methods("GET", "OPTIONS")
+
+	//file section
+	r.HandleFunc(fileupload.String(), UploadFileHandler).Methods("POST", "OPTIONS")
+	r.HandleFunc(infoUpload.String(), UploadInformationsHandler).Methods("POST", "OPTIONS")
 
 	//user customization area
 	// r.HandleFunc(userCustomization.String(), UserCustomizationHandler).Methods("POST", "OPTIONS")

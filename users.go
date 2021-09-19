@@ -33,14 +33,6 @@ type User struct {
 	// Travels        []Travel           `bson:"travels, omitempty" json:"travels, omitempty"`
 }
 
-type Document struct {
-	Title        string             `bson:"title, omitempty" json:"title, omitempty"`
-	Type         string             `bson:"type, omitempty" json:"type, omitempty"`
-	IsExpired    bool               `bson:"isExpired, omitempty" json:"isExpired, omitempty"`
-	CreationDate primitive.DateTime `bson:"creationDate, omitempty" json:"creationDate, omitempty"`
-	ExpiringDate primitive.DateTime `bson:"expiringDate, omitempty" json:"expiringDate, omitempty"`
-}
-
 // type Travel struct {
 // 	Date primitive.DateTime `bson:"date, omitempty" json:"date, omitempty"`
 // 	From string             `bson:"from, omitempty" json:"from, omitempty"`
