@@ -1,12 +1,8 @@
 var displays=[{'gate':'A1','name':'Roma Fiumicino','id':1,'pasp':0,'tiket':1,'visa':0,'green':1,'swab':1}];
 //type can be: id, pasp, ticket, visa, green, swab
 
-
-if (localStorage.getItem("displays") === null) {
-    localStorage.setItem("displays", JSON.stringify(displays));
-} else {
-    //per la demo non recupero dati modificati
-}
+//per la demo resetto al default
+localStorage.setItem("displays", JSON.stringify(displays));
 
 /*######## SETUP HOMEPAGE #########*/
 setuphomepage();
@@ -26,7 +22,7 @@ function setuphomepage(){
         card.id="g_"+element.gate;
         card.className="card gate";
 
-        h1.innerHTML=element.gate+" "+element.name;
+        h1.innerHTML=element.gate+": "+element.name;
 
         id.innerHTML="ID Card";
         if(element.id) id.className="requested";

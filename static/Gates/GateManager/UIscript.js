@@ -24,8 +24,7 @@ function updateRequirements(div,type){
     if(div.classList.contains("requested")) activating=1;
 
     displays.forEach((element,i) => {
-        if(element.gate==div.id){
-            console.log("A");
+        if(element.gate==div.parentElement.id.substring(2)){
             switch (type) {
                 case 'id': displays[i].id=activating; break;
                 case 'pasp': displays[i].pasp=activating; break;
@@ -37,6 +36,5 @@ function updateRequirements(div,type){
         }
     });
     //update
-    console.log(displays);
     localStorage.setItem("displays", JSON.stringify(displays));
 }

@@ -1,23 +1,22 @@
 /*######## BASE #########*/
-var gateinfo=[0];
-
+var gateinfo=[];
+var gate=0;
 function displaytoggle(){
     document.querySelector("#display").classList.toggle("show");
 }
 
-function selectGate(gate){
+function selectGate(gatein){
+    gate=gatein;
+    updatedisplay();
+    displaytoggle();
+}
+
+function updatedisplay(){
     displays.forEach(element => {
         if(element.gate==gate)
             gateinfo=element;
     });
-    console.log(gateinfo);
-    updatedisplay();
-    displaytoggle();
-}
-displaytoggle();
-
-function updatedisplay(){
-    if(gateinfo!=0){
+    if(gate!=0){
         document.querySelector("#doccontainer").innerHTML="";
         let container = document.querySelector("#doccontainer");
 
@@ -35,21 +34,33 @@ function addrequirement(type, container){
     switch (type) {
         case 'id':
             requirement.innerHTML="Carta d'identità";
+            requirement.classList.add("id");
+            document.querySelector("#doccontainer").className="id";
             break;
         case 'pasp':
             requirement.innerHTML="Passaporto";
+            requirement.classList.add("pasp");
+            document.querySelector("#doccontainer").className="pasp";
             break;
         case 'ticket':
             requirement.innerHTML="Biglietto d'imbarco";
+            requirement.classList.add("ticket");
+            document.querySelector("#doccontainer").className="ticket";
             break;
         case 'visa':
             requirement.innerHTML="Visto d'ingresso";
+            requirement.classList.add("visa");
+            document.querySelector("#doccontainer").className="visa";
             break;
         case 'green':
             requirement.innerHTML="Green Pass";
+            requirement.classList.add("green");
+            document.querySelector("#doccontainer").className="green";
             break;
         case 'swab':
             requirement.innerHTML="Certificato di negatività al tampone";
+            requirement.classList.add("swab");
+            document.querySelector("#doccontainer").className="swab";
             break;
     }
     container.appendChild(requirement);

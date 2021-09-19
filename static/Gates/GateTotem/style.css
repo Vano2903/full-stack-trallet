@@ -4,6 +4,7 @@
     opacity: 1;
 }
 /*######## ELEMENTI #########*/
+
   /*### wallet ###*/
   #wallet{
     padding-left: 1em;
@@ -103,7 +104,27 @@
   #documents{
     padding-left: 1em;
   }
-
+  /*logo*/
+  #logo{
+    display: flex;
+    position: absolute;
+    top:1em;
+    right:1em;
+  }
+  #logo > img{
+    height: 50px;
+    border-radius: 15px;
+    padding-left: .3em;
+    margin-top: -.25em;
+  }
+  #logo > p {
+    font-size: 1.8em;
+    padding-right: 0.3em;
+  }
+  #logo > p > b {
+    color: var(--theme-textcolor);
+    font-weight:900;
+  }
   /*######## DISPLAY #########*/
   #display{
     display: none;
@@ -117,3 +138,80 @@
   #display.show{
     display: block;
   }
+
+  /*######## DOC CONTAINER #########*/
+  #display > h1{
+    height: 10%;
+    padding:0.4em;
+    margin: 0;
+  }
+  #doccontainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 90%;
+    width:100%;
+    overflow: hidden;
+  }
+  #doccontainer > div{
+    font-size: 3em;
+    font-weight: 900;
+    color:white;
+    padding: 1em;
+    padding-top: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+  /*COLORI*/
+  #doccontainer>div.id,#doccontainer.id{
+    background-color: rgb(173, 166, 62);
+  }
+  #doccontainer>div.pasp,#doccontainer.pasp{
+    background-color: rgb(61, 20, 14);
+  }
+  #doccontainer>div.ticket,#doccontainer.ticket{
+    background-color: rgb(68, 68, 68);
+  }
+  #doccontainer>div.visa,#doccontainer.visa{
+    background-color: teal;
+  }
+  #doccontainer>div.green,#doccontainer.green{
+    background-color: rgb(78, 216, 36);
+  }
+  #doccontainer>div.swab,#doccontainer.swab{
+    background-color: rgb(175, 57, 112);
+  }
+
+  /*DIMENSIONI*/
+  #doccontainer > div:first-child:nth-last-child(n + 1),
+  #doccontainer > div:first-child:nth-last-child(n + 1) ~ div{
+    width: 100%;
+    height: 100%;
+  }
+  #doccontainer > div:first-child:nth-last-child(n + 2),
+  #doccontainer > div:first-child:nth-last-child(n + 2) ~ div{
+    width: 50%;
+    height: 100%;
+  }
+  #doccontainer > div:first-child:nth-last-child(n + 3),
+  #doccontainer > div:first-child:nth-last-child(n + 3) ~ div{
+    width: 50%;
+    height: 50%;
+  }
+  #doccontainer > div:first-child:nth-last-child(n + 4),
+  #doccontainer > div:first-child:nth-last-child(n + 4) ~ div{
+    width: 50%;
+    height: 50%;
+  }
+  #doccontainer > div:first-child:nth-last-child(n + 5),
+  #doccontainer > div:first-child:nth-last-child(n + 5) ~ div{
+    width: 33.333%;
+    height: 50%;
+  }
+  #doccontainer > div:first-child:nth-last-child(n + 6),
+  #doccontainer > div:first-child:nth-last-child(n + 6) ~ div{
+    width: 33.333%;
+    height: 50%;
+  }
+  
