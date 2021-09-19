@@ -103,117 +103,17 @@
   #documents{
     padding-left: 1em;
   }
-  /*logo*/
-  #logo{
-    display: flex;
+
+  /*######## DISPLAY #########*/
+  #display{
+    display: none;
     position: absolute;
-    top:1em;
-    left:1em;
-    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left:0;
+    background-color: #f5f5f5;
   }
-  #logo > img{
-    height: 30px;
-    border-radius: 15px;
-    padding-left: .3em;
-    margin-top: -.25em;
-  }
-  /*title*/
-  #wallettit{
-    margin-bottom: 0.5em;
-    font-weight:400;
-    font-size: 3em;
-    position: relative;
-    cursor: default;
-    animation: titlein 1s cubic-bezier(0, 0, 0, 1);
-  }
-  @keyframes titlein {
-    0%{left: -5em;}
-    100%{left: 0em;}
-  }
-  #wallettit > b {
-    color: #ea8c24;
-    font-weight:900;
-  }
-  /*cards*/
-  .docholder{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-right:1em;
-  }
-  .doc{
-    margin:0em;
-    width:90%;
-    max-width:400px;
-    padding:0.5em;
-    background-color: white;
-    box-shadow: 2px 2px 25px rgba(0, 0, 0, 0.226);
-    border: none;
-    border-radius: .50rem;
-    cursor: pointer;
-    transition: 0.3s all;
-  }
-  .doc > p{
-    font-size: 2em;
-    margin:0em;
-    padding-left: .3em;
-  }
-  .doc > img{
-    width:100%;
-  }
-  .doc:hover{
-    box-shadow: 3px 3px 50px rgba(0, 0, 0, 0.226);
-  }
-  #adddoc{
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    top: 3.6em;
-    right: 2em;
-    overflow: hidden;
-    border-radius: 20px;
-    background-color: white;
-    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.226);
-    cursor: pointer;
-    transition: .5s all;
-  }
-  #adddoc > h1{
-    right: 13px;
-    top: -4px;
-    font-size: 33px;
-    position: absolute;
-    color: #747474;
-    font-weight: 700;
-  }
-  #adddoc.open{
-    width: 200px;
-    height: 270px;
-    position: absolute;
-    top: 3.6em;
-    right: 2em;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.226);
-    cursor: pointer;
-    transition: .5s all;
-  }
-  #adddoc > h2{
-    text-align: right;
-    width: 200px;
-    font-size:1.5em;
-    top: 3.6em;
-    padding-right: 15px;
-    background-color: white;
-    background-image: linear-gradient(270deg, #383c3f1c, transparent);
-    background-position: 8em 0em;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    transition: .5s all;
-  }
-  #adddoc > h2:nth-of-type(1){
-    margin-top: 40px;
-  }
-  #adddoc > h2:hover{
-    background-image: linear-gradient(270deg, #383c3f1c, transparent);
-    background-position: 0em 0em;
+  #display.show{
+    display: block;
   }

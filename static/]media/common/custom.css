@@ -35,9 +35,9 @@ form{
     color: #a7a7a7;
     cursor:pointer;
   }
-  .underline{
+.underline:hover{
     color: #7c7c7c;
-  }
+ }
 /*######## COLORI #########*/
 :root {
     --theme-color: #5be99c;

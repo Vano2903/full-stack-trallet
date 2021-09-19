@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="..\..\static/]media/common/custom.css">
   <link rel="stylesheet" href="..\..\static\Gates\GateManager\style.css">
 
-  <title>Trallet displays - DEMO ADMIN</title>
+  <title>Trallet display manager - DEMO ADMIN</title>
 </head>
 
 <body>
@@ -30,54 +30,14 @@
 
     <div id="high" class="cardholder">
       <h1>Gates</h1>
+      <p>This feature works with localstorage in this DEMO version. Try it out by openig a display totem on a new tab on this same browser.</p>
       <hr>
     </div>
   </section>
 
-  <section id="documents">
-    <h1 id="wallettit">Your <b class="theme-color">Wallet</b></h1>
-
-    <div id="profile2" onclick="logoutconfirm(1)">
-      <p>Username</p>
-      <img src="..\..\static\]media\common\elements\generic_profilepic.png">
-    </div>
-
-    <div id="logo" onclick="transition('documents','wallet')">
-      <p>Back to</p>
-      <img src="..\..\static\]media\common\brand\purseFAV.png">
-    </div>
-
-    <div id="high" class="docholder">
-      <div id="c_wallet" class="doc">
-        <p>Green Pass</p>
-        <img src="..\..\static\]media\greenFacSimile.PNG">
-      </div>
-    </div>
-
-    <div id="adddoc" onclick="adddoctoggle()">
-      <h1>+</h1>
-      <h2 onclick="adddoc('id')">ID Card</h2>
-      <h2 onclick="adddoc('pasp')">Pasport</h2>
-      <h2 onclick="adddoc('ticket')">Boarding ticket</h2>
-      <h2 onclick="adddoc('visa')">Visas and auths</h2>
-      <h2 onclick="adddoc('green')">Green Pass</h2>
-      <h2 onclick="adddoc('swab')">Swab</h2>
-    </div>
-  </section>
-
-
   <script src="..\..\static/Gates/GateManager/UIscript.js"></script>
   <script src="..\..\static/Gates/GateManager/DATAscript.js"></script>
-  <script>
-    var check = localStorage.getItem("rememberMe");
-    if (check) {
-      var localsUser = localStorage.getItem("user")
-      if (localsUser !== null) {
-        user = JSON.parse(localsUser)
-        checkLogin("def");
-      }
-    }
-  </script>
+  
 </body>
 
 </html>
