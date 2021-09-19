@@ -202,6 +202,7 @@ hr{
   flex-wrap: wrap;
   justify-content: center;
   padding-right:1em;
+  gap:2em;
 }
 .doc{
   margin:0em;
@@ -278,4 +279,23 @@ hr{
 #adddoc > h2:hover{
   background-image: linear-gradient(270deg, #383c3f1c, transparent);
   background-position: 0em 0em;
+}
+
+
+/*title*/
+#traveltit{
+  margin-bottom: 0.5em;
+  font-weight:400;
+  font-size: 3em;
+  position: relative;
+  cursor: default;
+  animation: titlein 1s cubic-bezier(0, 0, 0, 1);
+}
+@keyframes titlein {
+  0%{left: -5em;}
+  100%{left: 0em;}
+}
+#traveltit > b {
+  color: #ea8c24;
+  font-weight:900;
 }
