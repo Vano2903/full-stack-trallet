@@ -14,12 +14,10 @@ Trallet is your simple virtual document holder that makes your life easier. In a
 ## Guide
 Register (or login if you already have an account) and access the main page of Trallet.
 Inside you can move to the Wallet section where you will have access to all your uploaded documents and their information.
-In beta, on the other hand, you can reach the travel portal at the following [link](https: //trallet.herokuapp.com/gate/manager).
+In beta, on the other hand, you can reach the travel portal at the following [link](https://trallet.herokuapp.com/gate/manager).
 
 ## Project informations
 **Name:** Trallet | Your Travel Wallet
-
-**Status:** Alpha v2.0.0a (current DEMO)
 
 **Developers:**
 - @vano2903
