@@ -17,6 +17,6 @@ function adddoc(type){
     console.log("aggiungi "+type);
 }
 
-function updateRequirements(div,type){
+function selectGate(gate){
     div.classList.toggle("requested");
 }
