@@ -160,3 +160,15 @@ async function uploadInfo(type) {
     let resp = await response.json();
     console.log(resp)
 }
+
+/*######## TRAVEL #########*/
+
+async function newtravel() {
+    let travel = "fiumicino"; // document.querySelector("#travelDestination").value
+    const response = await fetch("/travel/update", {
+        method: 'POST',
+        body: JSON.stringify(user)
+    });
+    const resp = await response.json();
+    console.log(resp)
+}

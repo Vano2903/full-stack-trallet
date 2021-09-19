@@ -148,7 +148,7 @@ function genDocuments(array) {
         div.setAttribute("id", doc.id)
         div.setAttribute("class", "doc")
         let p = document.createElement("p")
-        p.innerHTML = doc.title
+        p.innerHTML = doc.type
         let img = document.createElement("img")
         img.setAttribute("src", doc.url)
         div.appendChild(p)

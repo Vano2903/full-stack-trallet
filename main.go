@@ -261,6 +261,32 @@ func UserCustomizationHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func UpdateTravelhandler(w http.ResponseWriter, r *http.Request) {
+	var post User
+	_ = json.NewDecoder(r.Body).Decode(&post)
+
+	update := bson.M{"TravelTo": post.TravelTo}
+	err := UpdateUser(post.Email, post.Password, update)
+	if err != nil {
+		PrintErr(w, err.Error())
+		return
+	}
+	w.WriteHeader(http.StatusAccepted)
+	w.Write([]byte(`{"code": 202, "msg":"travel attribute updated correctly"}`))
+}
+
+func GetTravelHandler(w http.ResponseWriter, r *http.Request) {
+	var post User
+	_ = json.NewDecoder(r.Body).Decode(&post)
+
+	user, err := GetUser(post.Email, post.Password)
+	if err != nil {
+		PrintErr(w, err.Error())
+		return
+	}
+	w.Write([]byte(fmt.Sprintf(`{"code": 200, "travel":"%s"}`, user.TravelTo)))
+}
+
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -279,10 +305,14 @@ func main() {
 	r.HandleFunc(addUser.String(), AddUserHandler).Methods("POST", "OPTIONS")
 	r.HandleFunc(checkEmail.String(), CheckMailHandler).Methods("GET", "OPTIONS")
 
-	//socument section
+	//document section
 	r.HandleFunc(fileupload.String(), UploadFileHandler).Methods("POST", "OPTIONS")
 	r.HandleFunc(infoUpload.String(), UploadInformationsHandler).Methods("POST", "OPTIONS")
 	r.HandleFunc(getDocument.String(), GetDocumentHandler).Methods("POST", "OPTIONS")
+
+	//travel section
+	r.HandleFunc(updateTravel.String(), UpdateTravelhandler).Methods("POST", "OPTIONS")
+	r.HandleFunc(getTravel.String(), GetTravelHandler).Methods("POST", "OPTIONS")
 
 	//user customization area
 	// r.HandleFunc(userCustomization.String(), UserCustomizationHandler).Methods("POST", "OPTIONS")

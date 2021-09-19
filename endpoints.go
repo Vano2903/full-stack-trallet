@@ -18,6 +18,10 @@ const (
 	fileupload  endpoints = "/upload/file"
 	infoUpload  endpoints = "/upload/info/{kuid}"
 	getDocument endpoints = "/document/get/{id}"
+
+	//*travel endpoints
+	updateTravel endpoints = "/travel/update"
+	getTravel    endpoints = "/travel/get"
 )
 
 //convert endpoint to string
