@@ -1,7 +1,7 @@
 # Trallet | Your Travel Wallet
 
 ## Description
-Organization is an essential component in our life, especially during the last period where every day could have different rules.\n
+Organization is an essential component in our life, especially during the last period where every day could have different rules.
 Trallet is your simple virtual document holder that makes your life easier. In addition, to make it easy for you to travel from one country to another, Trallet updates in real time all restrictions due to CoViD-19 and reminds you in advance which documents to take to the airport or to your favorite grocery store!
 
 ## Installation
@@ -13,13 +13,17 @@ Trallet is your simple virtual document holder that makes your life easier. In a
 
 ## Guide
 
+
 ## Project informations
-**Name:** Trallet | Your Travel Wallet\n
-**Status:** Alpha v2.0.0a (in DEMO)\n
+**Name:** Trallet | Your Travel Wallet
+
+**Status:** Alpha v2.0.0a (current DEMO)
+
 **Developers:**
 - @vano2903
 - @fradgg
-- @andreamorandi2612\n
+- @andreamorandi2612
+
 **Tags:**
 - Hackathon 2021
 - CoViD-19
