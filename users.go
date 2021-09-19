@@ -30,6 +30,7 @@ type User struct {
 	IsMinor        bool               `bson:"isMinor, omitempty" json:"isMinor, omitempty"`
 	BornDate       primitive.DateTime `bson:"bornDate, omitempty" json:"bornDate, omitempty"`
 	Documents      []Document         `bson:"documents, omitempty" json:"documents, omitempty"`
+	TravelTo       string             `bson:"travelTo, omitempty" json:"travelTo, omitempty"`
 	// Travels        []Travel           `bson:"travels, omitempty" json:"travels, omitempty"`
 }
 

@@ -30,10 +30,6 @@ func GetDocument(email, password string, id string) (Document, error) {
 	return Document{}, fmt.Errorf("no document found with id: %d", id)
 }
 
-func AddDocument(email, password string) {
-
-}
-
 func UpdateDocument(email, password string) {
 
 }
