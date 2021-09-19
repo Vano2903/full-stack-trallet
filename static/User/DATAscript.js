@@ -164,7 +164,7 @@ async function uploadInfo(type) {
 /*######## TRAVEL #########*/
 
 async function newtravel() {
-    let travel = "fiumicino"; // document.querySelector("#travelDestination").value
+    let travel = document.querySelector("#travelDestination").value; // 
     const response = await fetch("/travel/update", {
         method: 'POST',
         body: JSON.stringify(user)
