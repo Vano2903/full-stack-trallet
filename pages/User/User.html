@@ -155,9 +155,9 @@
         <p>Travel</p>
         <p>Plan a new adventure</p>
       </div>
-      <div id="c_check" class="card card-check">
+      <div id="c_check" onclick="transition('wallet','documents')" class="card card-check">
         <p>Check</p>
-        <p>Something is missing</p>
+        <p>Something is missing for your next travel, check your wallet</p>
       </div>
       <div id="c_travel" class="card card-travel">
         <p>Ready</p>
@@ -212,7 +212,7 @@
 
     <div class="docholder" style="height: 50%;">
       <p>DEMO includes travels from BGY only</p>
-                
+      
       <form style="width: 80%; height:50%;margin-top: 6em;">
         <div id="signup1">
           <div class="row g-0 py-2">
@@ -227,7 +227,14 @@
             <div class="col">
               <div class="form-floating">
                 <select type="text" class="form-control" id="travelDestination">
-                  <option>Paris</option>
+                  <option>Roma Fiumicino</option>
+                  <option>Catania</option>
+                  <option>London City</option>
+                  <option>San Francisco</option>
+                  <option>Berlino</option>
+                  <option>Camberra</option>
+                  <option>Tokyo</option>
+                  <option>Parigi</option>
                 </select>
                 <label for="travelDestination">To</label>
               </div>

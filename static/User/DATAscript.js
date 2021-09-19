@@ -1,4 +1,13 @@
 var user;
+//micro database a fini di DEMO
+var displays=[{'gate':'A1','name':'Roma Fiumicino','id':1,'pasp':0,'tiket':1,'visa':0,'green':1,'swab':1},
+                {'gate':'A5','name':'Catania','id':1,'pasp':0,'tiket':1,'visa':0,'green':1,'swab':0},
+                {'gate':'A2','name':'London City','id':1,'pasp':1,'tiket':1,'visa':0,'green':1,'swab':1},
+                {'gate':'A10','name':'San Francisco','id':1,'pasp':1,'tiket':1,'visa':1,'green':0,'swab':0},
+                {'gate':'A15','name':'Berlino','id':1,'pasp':0,'tiket':1,'visa':0,'green':1,'swab':0},
+                {'gate':'A22','name':'Camberra','id':0,'pasp':1,'tiket':1,'visa':1,'green':0,'swab':1},
+                {'gate':'B1','name':'Tokyo','id':1,'pasp':1,'tiket':1,'visa':0,'green':1,'swab':1},
+                {'gate':'A8','name':'Parigi Bouvais','id':1,'pasp':0,'tiket':1,'visa':0,'green':1,'swab':0}];
 
 /*######## LOGIN #########*/
 function login() {
@@ -113,7 +122,7 @@ function setuphomepage() {
     //se ho viaggi in programma
     if (true) {
         //se mancano dei documenti
-        if (true) {
+        if (docsmissing()) {
             document.querySelector("#c_check").style.display = "block";
         } else {
             document.querySelector("#c_travel").style.display = "block";
@@ -170,6 +179,34 @@ async function newtravel() {
         body: JSON.stringify(user)
     });
     const resp = await response.json();
-    user.travelTo = travel
+    user.travelTo = travel;
+    console.log(resp);
+}
+
+async function gettravel() {
+    const response = await fetch("/travel/get", {
+        method: 'POST',
+        body: JSON.stringify(user)
+    });
+    const resp = await response.json();
     console.log(resp)
+    return resp.travel
+}
+
+function docsmissing(){
+    /*
+    let req;
+    displays.forEach(element => {
+        let travel = await gettravel();
+        if(element.name==travel){
+            req=element;
+        }
+    });
+    let missing=1;
+
+    
+    user.documents
+
+    if(req.id )*/
+    return true;
 }
