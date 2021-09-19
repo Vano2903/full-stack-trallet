@@ -56,6 +56,9 @@ function acceptlogin() {
     $("#login").css('display', 'none');
     $("#profile > p").text(user.name)
     $("#profile > img").attr("src", user.profilePicture)
+    $("#profile2 > p").text(user.name)
+    $("#profile2 > img").attr("src", user.profilePicture)
+
     genDocuments(user.documents)
 }
 
