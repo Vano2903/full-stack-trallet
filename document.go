@@ -7,7 +7,7 @@ import (
 )
 
 type Document struct {
-	Id    int    `bson:"id, omitempty" json:"id, omitempty"`
+	Id    string `bson:"id, omitempty" json:"id, omitempty"`
 	Title string `bson:"title, omitempty" json:"title, omitempty"`
 	Url   string `bson:"url, omitempty" json:"url, omitempty"`
 	Type  string `bson:"type, omitempty" json:"type, omitempty"`
@@ -16,7 +16,7 @@ type Document struct {
 	ExpiringDate primitive.DateTime `bson:"expiringDate, omitempty" json:"expiringDate, omitempty"`
 }
 
-func GetDocument(email, password string, id int) (Document, error) {
+func GetDocument(email, password string, id string) (Document, error) {
 	user, err := GetUser(email, password)
 	if err != nil {
 		return Document{}, err

@@ -46,7 +46,7 @@ func init() {
 
 type PostInfo struct {
 	User     User     `json:"user, omitempty"`
-	Document Document `json:"document, omitempty"`
+	Document Document `json:"documentInfo, omitempty"`
 }
 
 type File struct {
@@ -136,7 +136,7 @@ func UploadFileHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	defer file.Close()
-	// fmt.Printf("Uploaded File: %+v\n", handler.Filename)
+	fmt.Printf("Uploading File: %+v\n", handler.Filename)
 	// fmt.Printf("File Size: %+v\n", handler.Size)
 	// fmt.Printf("MIME Header: %+v\n", handler.Header)
 	buf := bytes.NewBuffer(nil)
@@ -150,6 +150,10 @@ func UploadFileHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	url, err := UploadFile(buf.Bytes(), handler.Filename)
+	if err != nil {
+		PrintInternalErr(w, err.Error())
+		return
+	}
 	id := ksuid.New()
 	w.WriteHeader(http.StatusAccepted)
 	w.Write([]byte(fmt.Sprintf(`{"code": 202, "fileID": "%s"}`, id.String())))
@@ -167,13 +171,13 @@ func UploadInformationsHandler(w http.ResponseWriter, r *http.Request) {
 			user, err := GetUser(postData.User.Email, postData.User.Password)
 			if err != nil {
 				PrintErr(w, err.Error())
+				return
 			}
-			postData.Document.Url = file.Url
-			postData.Document.Url = file.ID
-			user.Documents = append(user.Documents, postData.Document)
 
-			w.WriteHeader(http.StatusAccepted)
-			w.Write([]byte(`{"status": 202, "msg": "document added successfully"}`))
+			fmt.Println(file)
+			postData.Document.Url = file.Url
+			postData.Document.Id = file.ID
+			user.Documents = append(user.Documents, postData.Document)
 
 			update := bson.M{"documents": user.Documents}
 			err = UpdateUser(postData.User.Email, postData.User.Password, update)
@@ -182,9 +186,13 @@ func UploadInformationsHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			files = append(files[:i], files[i+1:]...)
+			w.WriteHeader(http.StatusAccepted)
+			w.Write([]byte(`{"status": 202, "msg": "document added successfully"}`))
+			log.Println("file uploaded successfully")
+			return
 		}
 	}
-	PrintErr(w, "invalid KUID")
+	PrintErr(w, `{"error":"invalid KUID"}`)
 }
 
 //will check if the url has "password" or "pfp" in it and will use a post to check the user
