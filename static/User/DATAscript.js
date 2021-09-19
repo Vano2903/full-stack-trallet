@@ -121,15 +121,17 @@ setuphomepage();
 async function setuphomepage() {
     //se ho viaggi in programma
     let travel = await gettravel();
-    if (travel != "") {
+    if (travel !== undefined) {
         //se mancano dei documenti
         if (docsmissing()) {
             document.querySelector("#c_check").style.display = "block";
+            document.querySelector("#c_newtravel").style.display = "none";
         } else {
             document.querySelector("#c_travel").style.display = "block";
         }
     } else { //se non ho viaggi in programma
         document.querySelector("#c_newtravel").style.display = "block";
+        document.querySelector("#c_check").style.display = "none";
     }
 }
 
@@ -182,6 +184,7 @@ async function newtravel() {
     const resp = await response.json();
     user.travelTo = travel;
     console.log(resp);
+    setuphomepage();
 }
 
 async function gettravel() {
