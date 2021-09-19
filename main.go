@@ -65,6 +65,24 @@ func LoginPageHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(home)
 }
 
+func GateManagerHandler(w http.ResponseWriter, r *http.Request) {
+	home, err := os.ReadFile("pages/Gates/GateManager.html")
+	if err != nil {
+		UnavailablePage(w)
+		return
+	}
+	w.Write(home)
+}
+
+func GateTotemHandler(w http.ResponseWriter, r *http.Request) {
+	home, err := os.ReadFile("pages/Gates/GateTotem.html")
+	if err != nil {
+		UnavailablePage(w)
+		return
+	}
+	w.Write(home)
+}
+
 //handler of the login (post), check if the user sent is a valid user and if it is will return the correct user page
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	var post User
@@ -299,6 +317,10 @@ func main() {
 
 	//root
 	r.HandleFunc(root.String(), LoginPageHandler).Methods("GET", "OPTIONS")
+
+	//gate
+	r.HandleFunc(gateManager.String(), GateManagerHandler).Methods("GET", "OPTIONS")
+	r.HandleFunc(gateTotem.String(), GateTotemHandler).Methods("GET", "OPTIONS")
 
 	//user area
 	r.HandleFunc(usersLogin.String(), LoginHandler).Methods("POST", "OPTIONS")
