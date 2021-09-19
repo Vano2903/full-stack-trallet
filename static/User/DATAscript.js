@@ -170,5 +170,6 @@ async function newtravel() {
         body: JSON.stringify(user)
     });
     const resp = await response.json();
+    user.travelTo = travel
     console.log(resp)
 }
