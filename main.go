@@ -107,6 +107,31 @@ func CheckMailHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func GetDocumentHandler(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["id"]
+	var userPost User
+	_ = json.NewDecoder(r.Body).Decode(&userPost)
+
+	user, err := GetUser(userPost.Email, userPost.Password)
+	if err != nil {
+		PrintErr(w, err.Error())
+		return
+	}
+	if id == "all" {
+		documentsJson, _ := json.Marshal(user.Documents)
+		w.Write(documentsJson)
+		return
+	}
+	for _, doc := range user.Documents {
+		if doc.Id == id {
+			documentsJson, _ := json.Marshal(user.Documents)
+			w.Write(documentsJson)
+			return
+		}
+	}
+	PrintErr(w, fmt.Sprintf(`{"error": "no document was found with id: %s"}`, id))
+}
+
 //handler that let user register to the database
 func AddUserHandler(w http.ResponseWriter, r *http.Request) {
 	var post User
@@ -251,11 +276,13 @@ func main() {
 
 	//user area
 	r.HandleFunc(usersLogin.String(), LoginHandler).Methods("POST", "OPTIONS")
+	r.HandleFunc(addUser.String(), AddUserHandler).Methods("POST", "OPTIONS")
 	r.HandleFunc(checkEmail.String(), CheckMailHandler).Methods("GET", "OPTIONS")
 
-	//file section
+	//socument section
 	r.HandleFunc(fileupload.String(), UploadFileHandler).Methods("POST", "OPTIONS")
 	r.HandleFunc(infoUpload.String(), UploadInformationsHandler).Methods("POST", "OPTIONS")
+	r.HandleFunc(getDocument.String(), GetDocumentHandler).Methods("GET", "OPTIONS")
 
 	//user customization area
 	// r.HandleFunc(userCustomization.String(), UserCustomizationHandler).Methods("POST", "OPTIONS")
