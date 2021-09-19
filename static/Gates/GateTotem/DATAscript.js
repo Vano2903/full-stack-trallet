@@ -1,4 +1,4 @@
-var displays=[{'gate':'A1','name':'Roma Fiumicino','id':1,'pasp':0,'tiket':1,'visa':0,'green':1,'swab':1}];
+var displays=[];
 //type can be: id, pasp, ticket, visa, green, swab
 
 if (localStorage.getItem("displays") === null) {
