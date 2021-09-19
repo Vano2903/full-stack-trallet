@@ -120,7 +120,8 @@ setuphomepage();
 
 function setuphomepage() {
     //se ho viaggi in programma
-    if (true) {
+        let travel = await gettravel();
+    if (travel!="") {
         //se mancano dei documenti
         if (docsmissing()) {
             document.querySelector("#c_check").style.display = "block";
