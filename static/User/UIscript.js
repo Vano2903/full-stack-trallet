@@ -3,7 +3,7 @@ screen.orientation.lock('portrait');
 //not to mess up while scanning a code
 
 //demo start page
-transition("signup", "documents");
+// transition("signup", "documents");
 
 function transition(from, to) {
     document.querySelector("#" + from).style.opacity = 0;
@@ -16,6 +16,7 @@ function transition(from, to) {
         document.querySelector("#" + to).style.opacity = 1;
     }, 700);
 }
+
 /*######## login #########*/
 function loginCheck(email, password) {
     var emailok; var passok;
@@ -48,12 +49,17 @@ function loginCheck(email, password) {
         return true;
     } else return false;
 }
+
 function acceptlogin() {
     transition("login", "wallet");
+    $("#signup").css('display', 'none');
+    $("#login").css('display', 'none');
 }
+
 function rejectlogin() {
     console.log("rifiutato")
 }
+
 /*######## signup #########*/
 function checksignup1(email, pass, pass1, newemail) {
     var emailok; var passok;
@@ -101,6 +107,7 @@ function checksignup1(email, pass, pass1, newemail) {
         return true;
     } else return false;
 }
+
 function checksignup2(birthdate) {
     //aggiungere il controllo data
     return true;
@@ -115,9 +122,10 @@ function logoutconfirm(x) {
         console.log("nasc");
     }
 };
+
 function logout() {
-    //logout
-    //cancello i dati
+    localStorage.removeItem("rememberMe");
+    localStorage.removeItem("user")
     location.reload();
 };
 
@@ -137,12 +145,10 @@ function adddoctoggle() {
     else
         document.querySelector("#adddoc>h1").innerHTML = "+";
 }
+
 function adddoc(type) {
-    //type can be: id, pasp, ticket, visa, green, swab
-    // console.log("aggiungi " + type);
     lastPressed = type;
     $("#inputFile").trigger('click');
-
 }
 
 $("#inputFile").on('change', function () {

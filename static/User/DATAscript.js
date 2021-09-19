@@ -45,8 +45,10 @@ async function checkLogin(code) {
             localStorage.setItem("rememberMe", false)
         }
         acceptlogin();
+        console.log("accepted")
     } else {
         rejectlogin()
+        console.log("rejected")
     }
 }
 /*######## SIGNUP ########*/
