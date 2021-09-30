@@ -21,8 +21,8 @@ In beta, on the other hand, you can reach the travel portal at the following [li
 
 **Developers:**
 - @vano2903
-- @fradgg
-- @andreamorandi2612
+- @francescodandrea
+- @MoraGames
 
 **Tags:**
 - Hackathon 2021
