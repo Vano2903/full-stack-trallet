@@ -20,9 +20,9 @@ In beta, on the other hand, you can reach the travel portal at the following [li
 **Name:** Trallet | Your Travel Wallet
 
 **Developers:**
-- @vano2903
-- @francescodandrea
-- @MoraGames
+@vano2903
+@francescodandrea
+@MoraGames
 
 **Tags:**
 - Hackathon 2021
